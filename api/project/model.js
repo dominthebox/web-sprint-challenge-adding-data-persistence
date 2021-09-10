@@ -1,8 +1,13 @@
 // build your `Project` model here
 const db = require('../../data/dbConfig');
+const mappers = require('../../data/helpers/mappers');
 
 function findProjects() {
     return db('projects as p')
+        .then(projects => {
+            return projects.map(project => 
+                mappers.projectToBody(project))
+        })
 }
 
 function addProject(project) {

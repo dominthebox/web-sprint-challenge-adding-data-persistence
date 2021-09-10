@@ -16,7 +16,7 @@ function booleanToInt(bool) {
 function projectToBody(project) {
     const result = {
         ...project,
-        completed: intToBoolean(project.completed),
+        project_completed: intToBoolean(project.project_completed),
     };
 
     if(project.tasks) {
