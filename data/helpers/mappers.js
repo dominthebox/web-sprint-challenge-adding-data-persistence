@@ -32,6 +32,6 @@ function projectToBody(project) {
 function taskToBody(task) {
     return {
         ...task,
-        completed: intToBoolean(task.completed)
+        task_completed: intToBoolean(task.task_completed)
     };
 }

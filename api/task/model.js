@@ -1,5 +1,6 @@
 // build your `Task` model here
 const db = require('../../data/dbConfig')
+const mappers = require('../../data/helpers/mappers')
 
 function findTasks() {
     return db('tasks as t')
@@ -13,6 +14,8 @@ function addTask(task) {
             return db('tasks')
                 .where('task_id', task_id)
                 .first()
+                .then(task_id => 
+                    mappers.taskToBody(task_id))
         })
 }
 

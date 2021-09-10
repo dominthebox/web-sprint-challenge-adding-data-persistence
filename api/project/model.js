@@ -17,7 +17,8 @@ function addProject(project) {
             return db('projects as p') 
                 .where('project_id', project_id)
                 .first()
-                .then(project_id => mappers.projectToBody(project_id))
+                .then(project_id => 
+                    mappers.projectToBody(project_id))
         })
 }
 
