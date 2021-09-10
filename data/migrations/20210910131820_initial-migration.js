@@ -16,8 +16,20 @@ exports.up = function(knex) {
                 .unique()
             column.string('resource_description', 255)
         })
-        .createTable('tasks', table => {
-            table.increments('task_id')
+        .createTable('tasks', column => {
+            column.increments('task_id')
+            column.string('task_description', 255)
+                .notNullable()
+            column.string('task_notes', 255)
+            column.boolean('task_completed')
+                .defaultTo(false)
+            column.integer('project_id')
+                .unsigned()
+                .notNullable()
+                .references('project_id')
+                .inTable('projects')
+                .onUpdate('CASCADE')
+                .onDelete('RESTRICT')
         })
 };
 
