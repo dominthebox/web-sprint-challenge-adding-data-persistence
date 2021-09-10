@@ -11,11 +11,13 @@ function findProjects() {
 }
 
 function addProject(project) {
-    return db('projects').insert(project)
+
+    return db('projects as p').insert(project)
         .then(([project_id]) => {
-            return db('projects')
+            return db('projects as p') 
                 .where('project_id', project_id)
                 .first()
+                .then(project_id => mappers.projectToBody(project_id))
         })
 }
 
