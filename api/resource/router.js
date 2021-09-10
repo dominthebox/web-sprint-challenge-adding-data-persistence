@@ -1,14 +1,24 @@
 // build your `/api/resources` router here
 const express = require('express');
-
+const Resources = require('./model')
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    res.json('getting the resources')
+    Resources.findResources()
+        .then(resources => {
+            res.json(resources)
+        })
+        .catch(next)
 });
 
 router.post('/', (req, res, next) => {
-    res.json('posting a resource')
+    const resource = req.body
+
+    Resources.addResource(resource)
+        .then(resource => {
+            res.status(201).json(resource)
+        })
+        .catch(next)
 });
 
 router.use((err, req, res,  next) => { // eslint-disable-line

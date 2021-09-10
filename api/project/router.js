@@ -4,7 +4,7 @@ const Projects = require('./model');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    Projects.find()
+    Projects.findProjects()
         .then(projects => {
             res.json(projects)
         })
@@ -12,7 +12,13 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    res.json('posting a project')
+    const project = req.body
+
+    Projects.addProject(project)
+        .then(project => {
+            res.status(201).json(project)
+        })
+        .catch(next)
 });
 
 router.use((err, req, res,  next) => { // eslint-disable-line
